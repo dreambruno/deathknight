@@ -1,0 +1,35 @@
+<resources>
+    <!-- Strings related to Abertura -->
+    <string name="app_name">DeathKnight</string>
+    <string name="txCentral">DeathKnight</string>
+    <string name="txAssinatura">dreambruno@gmail.com</string>
+    <string name="txVerssao">Versão:\n1.0.1</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to LoginGoogle -->
+    <string name="action_sign_in">Entrar</string>
+    <string name="txClan">DK Swordplay</string>
+    <string name="txGoogle">Seu login é feito via google</string>
+    <string name="title_activity_dashboard">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Opções</string>
+
+    <!-- Strings related to MenuLateral (activity_dashboard_drawer) -->
+    <string name="menu_home">Home</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_eventos">Eventos</string>
+    <string name="menu_cofiguracoes">Configurações</string>
+    <string name="menu_adm">ADM</string>
+    <string name="menu_comunicacao">Comunicação</string>
+    <string name="menu_compartilhar">Compartilhar</string>
+    <string name="menu_enviar">Enviar</string>
+
+
+    <!-- Strings Genéricas -->
+    <string name="btSalvar">Salvar</string>
+
+    <!-- x -->
+</resources>

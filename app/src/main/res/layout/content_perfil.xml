@@ -94,47 +94,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Usar: "
-                android:textSize="18sp" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkedButton="@+id/rbApelido"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rbNome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:text="Nome"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/rbApelido"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:text="Apelido"
-                    android:textSize="18sp" />
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -172,7 +131,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:focusableInTouchMode="false"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
         </LinearLayout>
 
         <LinearLayout
@@ -188,14 +147,19 @@
                 android:text="Dt. Nasc.: "
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/etxNascimento"
+            <Button
+                android:id="@+id/btNasc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:focusableInTouchMode="false"
-                android:inputType="textPersonName" />
+                android:background="@drawable/degrade"
+                android:enabled="false"
+                android:onClick="abrirDatepicker"
+                android:scaleY=".80"
+                android:text="@string/btNascimento"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -249,6 +213,7 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/degrade"
@@ -258,6 +223,7 @@
                 android:text="Salvar"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -45,11 +45,21 @@ public class Data {
      * @param num
      * @return string de dois dígitos.
      */
-    public static String AddZero(int num){
+    public static String addZero(int num){
         if(num < 10){
             return "0" + num;
         } else{
             return Integer.toString(num);
         }
+    }
+
+    public static String dataFormatada(Calendar data){
+        String retorno = "";
+        if(data != null) {
+            retorno = addZero(data.get(Calendar.DAY_OF_MONTH)) + "/";
+            retorno += addZero(data.get(Calendar.MONTH) + 1) + "/";
+            retorno += data.get(Calendar.YEAR);
+        }
+        return retorno;
     }
 }

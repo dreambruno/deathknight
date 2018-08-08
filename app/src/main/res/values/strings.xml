@@ -27,6 +27,8 @@
     <string name="menu_compartilhar">Compartilhar</string>
     <string name="menu_enviar">Enviar</string>
 
+    <!-- Strings realated to Dashboard -->
+    <string name="btNascimento">Insira...</string>
 
     <!-- Strings Genéricas -->
     <string name="btSalvar">Salvar</string>

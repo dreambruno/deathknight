@@ -26,7 +26,6 @@
             android:name=".telas.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".telas.Perfil"></activity>
     </application>
 
 </manifest>

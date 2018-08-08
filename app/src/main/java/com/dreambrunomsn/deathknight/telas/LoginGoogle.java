@@ -1,17 +1,22 @@
 package com.dreambrunomsn.deathknight.telas;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 
 import com.dreambrunomsn.deathknight.R;
 import com.dreambrunomsn.deathknight.classes.Sing;
 import com.dreambrunomsn.deathknight.utilitario.Data;
 
+import java.util.Calendar;
+
 public class LoginGoogle extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +32,7 @@ public class LoginGoogle extends AppCompatActivity {
         Sing.getUsuario().setEmail("dreambruno@gmail.com");
         Sing.getUsuario().setAdm(true);
         Sing.getUsuario().setMasc(true);
-        Sing.getUsuario().setUsarApelido(true);
-        Sing.getUsuario().setNascimento(Data.setData(19810715));
+        Sing.getUsuario().setNascimento(Data.setData(19810615));
         Sing.getUsuario().setTelefone("21 99933-1441");
         Sing.getUsuario().setBanScore(0);
         Sing.getUsuario().setBanFim(null);

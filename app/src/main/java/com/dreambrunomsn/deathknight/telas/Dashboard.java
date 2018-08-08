@@ -1,12 +1,8 @@
 package com.dreambrunomsn.deathknight.telas;
 
-import android.content.Intent;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.view.DragEvent;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,8 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowInsets;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -28,7 +25,9 @@ import android.widget.ViewFlipper;
 
 import com.dreambrunomsn.deathknight.R;
 import com.dreambrunomsn.deathknight.classes.Sing;
-import com.dreambrunomsn.deathknight.classes.Usuario;
+import com.dreambrunomsn.deathknight.utilitario.Data;
+
+import java.util.Calendar;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,12 +44,12 @@ public class Dashboard extends AppCompatActivity
     private EditText etxPatente;
     private EditText etxEmail;
     private EditText etxTelefone;
-    private EditText etxNascimento;
 
-    private RadioButton rbNome;
-    private RadioButton rbApelido;
     private RadioButton rbMasculino;
     private RadioButton rbFeminino;
+
+    private Button btNascimento;
+    private Calendar nascimento;
 
     private ViewFlipper viewFlipper;
 
@@ -82,12 +81,27 @@ public class Dashboard extends AppCompatActivity
         etxPatente = (EditText) findViewById(R.id.etxPatente);
         etxEmail = (EditText) findViewById(R.id.etxEmail);
         etxTelefone = (EditText) findViewById(R.id.etxTelefone);
-        etxNascimento = (EditText) findViewById(R.id.etxNascimento);
 
-        rbNome = (RadioButton) findViewById(R.id.rbNome);
-        rbApelido = (RadioButton) findViewById(R.id.rbApelido);
         rbMasculino = (RadioButton) findViewById(R.id.rbMasculino);
         rbFeminino = (RadioButton) findViewById(R.id.rbFeminino);
+        btNascimento = (Button) findViewById(R.id.btNasc);
+
+
+        etxNome.setText(Sing.getUsuario().getNome());
+        etxNick.setText(Sing.getUsuario().getApelido());
+        etxPatente.setText(Sing.getUsuario().getPatente());
+        etxEmail.setText(Sing.getUsuario().getEmail());
+        etxTelefone.setText(Sing.getUsuario().getTelefone());
+
+        rbMasculino.setChecked(Sing.getUsuario().isMasc());
+        rbFeminino.setChecked(!Sing.getUsuario().isMasc());
+
+        nascimento = Sing.getUsuario().getNascimento();
+        if(nascimento == null) {
+            nascimento = Calendar.getInstance();
+        }else{
+            btNascimento.setText(Data.dataFormatada(nascimento));
+        }
     }
     View.OnClickListener nav = new View.OnClickListener() {
         @Override
@@ -117,7 +131,7 @@ public class Dashboard extends AppCompatActivity
         imFoto = (ImageView)findViewById(R.id.imFoto);
 
 
-        tvNome.setText(Sing.getUsuario().isUsarApelido()?Sing.getUsuario().getApelido():Sing.getUsuario().getNome());
+        tvNome.setText(Sing.getUsuario().getApelido());
         tvPatente.setText(Sing.getUsuario().getPatente());
         //imFoto.setImageBitmap(R.mipmap.ic_launcher);
         return true;
@@ -186,10 +200,18 @@ public class Dashboard extends AppCompatActivity
 
     public void salvar(View v){
         Sing.getUsuario().setNome(etxNome.getText().toString());
-        String tx = Sing.getUsuario().getNome();
-        tvNome.setText(tx);
+        Sing.getUsuario().setApelido(etxNick.getText().toString());
+        Sing.getUsuario().setEmail(etxEmail.getText().toString());
+        Sing.getUsuario().setTelefone(etxTelefone.getText().toString());
 
+        Sing.getUsuario().setNascimento(nascimento);
+        Sing.getUsuario().setMasc(rbMasculino.isSelected());
+
+
+        tvNome.setText(Sing.getUsuario().getApelido());
         escondeTeclado();
+        editarPerfil.setChecked(false);
+        editar(null);
         onNavigationItemSelected(null);
 
         //MenuItem mi = (MenuItem) findViewById(R.id.nav_perfil);
@@ -211,13 +233,9 @@ public class Dashboard extends AppCompatActivity
         etxTelefone.setFocusableInTouchMode(check);
         etxTelefone.setFocusable(check);
 
-        etxNascimento.setFocusableInTouchMode(check);
-        etxNascimento.setFocusable(check);
-
-        rbNome.setEnabled(check);
-        rbApelido.setEnabled(check);
         rbMasculino.setEnabled(check);
         rbFeminino.setEnabled(check);
+        btNascimento.setEnabled(check);
 
         escondeTeclado();
     }
@@ -231,7 +249,18 @@ public class Dashboard extends AppCompatActivity
         imm.hideSoftInputFromWindow(etxNome.getWindowToken(), 0);
     }
 
-    private void preencheCampos(){
-        //
+    public void abrirDatepicker(View v){
+        DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                nascimento.set(year, month, dayOfMonth);
+                btNascimento.setText(Data.dataFormatada(nascimento));
+            }
+        };
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Dashboard.this, dateListener,
+                                nascimento.get(Calendar.YEAR),
+                                nascimento.get(Calendar.MONTH),
+                                nascimento.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 }

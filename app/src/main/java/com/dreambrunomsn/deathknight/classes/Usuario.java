@@ -22,7 +22,6 @@ public class Usuario implements Serializable {
 
     private boolean masc;
     private boolean adm;
-    private boolean usarApelido;
 
     private int banScore;
     private int nivel;
@@ -39,7 +38,6 @@ public class Usuario implements Serializable {
         this.banFim = null;
         this.masc = false;
         this.adm = false;
-        this.usarApelido = false;
         this.telefone = "";
         this.banScore = 0;
         this.nivel = 0;
@@ -133,14 +131,6 @@ public class Usuario implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public boolean isUsarApelido() {
-        return usarApelido;
-    }
-
-    public void setUsarApelido(boolean usarApelido) {
-        this.usarApelido = usarApelido;
     }
 
     public int getNivel() {

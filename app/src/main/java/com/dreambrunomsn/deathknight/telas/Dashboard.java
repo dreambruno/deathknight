@@ -188,8 +188,6 @@ public class Dashboard extends AppCompatActivity
                 break;
 
             case R.id.nav_share:
-                viewFlipper.setDisplayedChild(5);
-                setTitle("Teste");
                 break;
             case R.id.nav_send:
                 break;

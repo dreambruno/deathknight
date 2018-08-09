@@ -30,7 +30,7 @@ public class LoginGoogle extends AppCompatActivity {
         Sing.getUsuario().setPatente("Cabo");
         Sing.getUsuario().setApelido("Dream");
         Sing.getUsuario().setEmail("dreambruno@gmail.com");
-        Sing.getUsuario().setAdm(false);
+        Sing.getUsuario().setAdm(true);
         Sing.getUsuario().setMasc(true);
         Sing.getUsuario().setNascimento(Data.setData(19810615));
         Sing.getUsuario().setTelefone("21 99933-1441");

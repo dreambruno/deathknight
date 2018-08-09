@@ -30,6 +30,12 @@
     <!-- Strings realated to Dashboard -->
     <string name="btNascimento">Insira...</string>
 
+    <!-- Strings realated to ADM-Usuário -->
+    <string name="admTexto">Esse é seu mini canal de comunicação com a ADM. Deixe sua mensagem e
+        assim que possível retornaremos em um de nossos canais</string>
+    <string name="tituloHint">Titulo</string>
+    <string name="mensagemHint">Escreva sua mensagem...</string>
+
     <!-- Strings Genéricas -->
     <string name="btSalvar">Salvar</string>
 

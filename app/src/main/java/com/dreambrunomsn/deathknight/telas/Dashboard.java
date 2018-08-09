@@ -1,6 +1,7 @@
 package com.dreambrunomsn.deathknight.telas;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -177,7 +178,12 @@ public class Dashboard extends AppCompatActivity
                 break;
 
             case R.id.nav_adm:
-                viewFlipper.setDisplayedChild(4);
+                if(Sing.getUsuario().isAdm()){
+                    Intent intent = new Intent(Dashboard.this, Administracao.class);
+                    startActivity(intent);
+                }else{
+                    viewFlipper.setDisplayedChild(4);
+                }
                 setTitle(R.string.menu_adm);
                 break;
 

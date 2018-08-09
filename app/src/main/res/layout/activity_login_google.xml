@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:layout_weight="1"
-            android:background="@drawable/degrade"
+            android:background="@drawable/backgound_botao"
             android:onClick="entrar"
             android:text="@string/action_sign_in"
             android:textSize="24sp"

@@ -179,7 +179,7 @@ public class Dashboard extends AppCompatActivity
 
             case R.id.nav_adm:
                 if(Sing.getUsuario().isAdm()){
-                    Intent intent = new Intent(Dashboard.this, Administracao.class);
+                    Intent intent = new Intent(Dashboard.this, SalaAdm.class);
                     startActivity(intent);
                 }else{
                     viewFlipper.setDisplayedChild(4);

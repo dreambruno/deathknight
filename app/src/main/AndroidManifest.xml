@@ -26,7 +26,10 @@
             android:name=".telas.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".telas.Administracao"></activity>
+        <activity
+            android:name=".telas.SalaAdm"
+            android:label="@string/title_activity_sala_adm"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

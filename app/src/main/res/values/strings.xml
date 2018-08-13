@@ -35,6 +35,10 @@
         assim que possível retornaremos em um de nossos canais</string>
     <string name="tituloHint">Titulo</string>
     <string name="mensagemHint">Escreva sua mensagem...</string>
+    <string name="fragBanidos">Banidos: </string>
+    <string name="fragRetornam">Retornam Hoje: </string>
+    <string name="fragAmanha">Amanhã: </string>
+    <string name="fragListar">(Listar)</string>
 
     <string name="usuario">Usuário</string>
     <string name="uniforme">Uniforme</string>

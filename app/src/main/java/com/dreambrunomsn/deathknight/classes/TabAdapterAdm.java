@@ -1,9 +1,11 @@
 package com.dreambrunomsn.deathknight.classes;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.Toast;
 
 import com.dreambrunomsn.deathknight.R;
 
@@ -16,13 +18,14 @@ import java.util.List;
 
 public class TabAdapterAdm extends FragmentPagerAdapter {
 
-    List<String> listaTitulos = new ArrayList<>();
-    List<Fragment> listaFragments = new ArrayList<>();
+    private List<String> listaTitulos = new ArrayList<>();
+    private List<Fragment> listaFragments = new ArrayList<>();
+    private Context contexto;
 
     public TabAdapterAdm(FragmentManager fm, Context context) {
         super(fm);
 
-        String n = context.getString(R.string.usuario);
+        contexto = context;
 
         listaTitulos.add(context.getString(R.string.usuario));
         listaFragments.add(new FragmentUsuario());
@@ -37,14 +40,15 @@ public class TabAdapterAdm extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 FragmentUsuario usuario = new FragmentUsuario();
+                usuario.setContext(contexto);
                 return usuario;
             case 1:
                 FragmentUniforme uniforme = new FragmentUniforme();
+                uniforme.setContext(contexto);
                 return uniforme;
         }
         return null;
     }
-
 
     @Override
     public int getCount() {

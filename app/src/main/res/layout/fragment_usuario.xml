@@ -159,6 +159,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="15sp"
                         android:background="@drawable/backgound_botao"
+                        android:onClick="patente"
                         android:paddingLeft="50dp"
                         android:paddingRight="50dp"
                         android:text="Patente"

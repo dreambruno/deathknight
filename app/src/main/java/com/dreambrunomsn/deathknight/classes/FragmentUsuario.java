@@ -1,16 +1,13 @@
 package com.dreambrunomsn.deathknight.classes;
 
 import android.app.Dialog;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +22,7 @@ public class FragmentUsuario extends Fragment implements View.OnClickListener{
 
     private Context contexto;
     private Button btBanir;
+    private Button btPatente;
 
     private TextView listarBan;
     private TextView listarHoje;
@@ -35,10 +33,12 @@ public class FragmentUsuario extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_usuario, container, false);
 
         btBanir = (Button) view.findViewById(R.id.btBanir);
+        btPatente = (Button) view.findViewById(R.id.btPatente);
         listarBan = (TextView) view.findViewById(R.id.tvListarBanidos);
         listarHoje = (TextView) view.findViewById(R.id.tvListarHoje);
 
         btBanir.setOnClickListener(this);
+        btPatente.setOnClickListener(this);
         listarBan.setOnClickListener(this);
         listarHoje.setOnClickListener(this);
 
@@ -57,6 +57,8 @@ public class FragmentUsuario extends Fragment implements View.OnClickListener{
             listarBanidos(true);
         } else if(v.getId() == listarHoje.getId()){
             listarBanidos(false);
+        } else if(v.getId() == btPatente.getId()){
+            //
         }
     }
 
@@ -66,5 +68,9 @@ public class FragmentUsuario extends Fragment implements View.OnClickListener{
         dialogBanidos.setContentView(R.layout.lista_banidos);
         dialogBanidos.show();
 
+    }
+
+    public void patente(View v){
+        //
     }
 }

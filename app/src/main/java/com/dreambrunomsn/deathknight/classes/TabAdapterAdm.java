@@ -1,14 +1,10 @@
 package com.dreambrunomsn.deathknight.classes;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.widget.Toast;
-
+import android.content.Context;
 import com.dreambrunomsn.deathknight.R;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,17 +1,14 @@
 package com.dreambrunomsn.deathknight.telas;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.dreambrunomsn.deathknight.R;
+import com.dreambrunomsn.deathknight.banco.DatabaseAcao;
 import com.dreambrunomsn.deathknight.classes.Sing;
 import com.dreambrunomsn.deathknight.utilitario.Data;
 
@@ -23,6 +20,8 @@ public class LoginGoogle extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login_google);
+
+        DatabaseAcao dba = new DatabaseAcao(this);
     }
 
     public void entrar(View v){

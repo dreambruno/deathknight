@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 public class Usuario implements Serializable {
 
-    private String id;
+    private String idUsuario;
 
     private String nome;
     private String apelido;
@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
 
     // CONSTRUCTOR
     public Usuario() {
-        this.id = "";
+        this.idUsuario = "";
         this.nome = "";
         this.apelido = "";
         this.email = "";
@@ -85,12 +85,12 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getId() {
-        return id;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public Calendar getNascimento() {

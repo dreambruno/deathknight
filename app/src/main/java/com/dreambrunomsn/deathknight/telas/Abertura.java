@@ -26,7 +26,7 @@ public class Abertura extends AppCompatActivity {
             @Override
             public void run(){
                 // Pegando dados do save
-                //List<ContentValues> lista = new DatabaseHelper(getBaseContext()).buscarEscala();
+                //List<ContentValues> lista = new DatabaseConexao(getBaseContext()).buscarEscala();
 
                 Intent intent = new Intent(Abertura.this, LoginGoogle.class);
                 /*

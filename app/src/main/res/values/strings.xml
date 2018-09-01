@@ -42,9 +42,16 @@
 
     <string name="usuario">Usuário</string>
     <string name="uniforme">Uniforme</string>
+    <string name="testePatente">Teste de Patente</string>
+
+
+    <string name="btCriar">Criar</string>
+    <string name="btAplicar">Aplicar</string>
+    <string name="btFinalizar">Finalizar</string>
 
     <!-- Strings Genéricas -->
     <string name="btSalvar">Salvar</string>
+    <string name="btEditar">Editar</string>
     <string name="title_activity_sala_adm">SalaAdm</string>
     <string name="section_format">Hello World from section: %1$d</string>
 

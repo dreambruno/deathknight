@@ -162,7 +162,7 @@
                         android:onClick="patente"
                         android:paddingLeft="50dp"
                         android:paddingRight="50dp"
-                        android:text="Patente"
+                        android:text="@string/testePatente"
                         tools:layout_conversion_absoluteHeight="48dp"
                         tools:layout_conversion_absoluteWidth="124dp"
                         tools:layout_conversion_absoluteX="150dp"

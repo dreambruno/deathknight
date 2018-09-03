@@ -22,7 +22,7 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/btPatenteCriar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -30,6 +30,49 @@
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:text="@string/btCriar" />
+
+            <LinearLayout
+                android:id="@+id/llCriar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/etxDataTeste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:hint="15/07/1981"
+                    android:inputType="date" />
+
+                <Spinner
+                    android:id="@+id/spAdm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btPatenteSalvar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/backgound_botao"
+                        android:scaleY=".8"
+                        android:text="@string/btSalvar"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btPatenteAplicar"
@@ -105,7 +148,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/btPatenteFinalizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -116,7 +159,7 @@
                 android:text="@string/btFinalizar" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/btPatenteEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

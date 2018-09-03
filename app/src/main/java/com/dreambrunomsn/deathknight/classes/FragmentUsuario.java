@@ -7,15 +7,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreambrunomsn.deathknight.R;
 import com.dreambrunomsn.deathknight.banco.DatabaseAcao;
 import com.dreambrunomsn.deathknight.banco.TestePatenteVo;
+import com.dreambrunomsn.deathknight.utilitario.Mascara;
 
 import java.util.List;
 
@@ -23,7 +28,7 @@ import java.util.List;
  * Created by Dream on 11/08/2018.
  */
 
-public class FragmentUsuario extends Fragment implements View.OnClickListener{
+public class FragmentUsuario extends Fragment implements OnClickListener{
 
     private Context contexto;
     private Button btBanir;
@@ -77,16 +82,42 @@ public class FragmentUsuario extends Fragment implements View.OnClickListener{
     public void testePatente(){
         DatabaseAcao dba = new DatabaseAcao(getContext());
         List<TestePatenteVo> teste = dba.getTestePatente();
-        if(teste == null){
-            // abrir intente de criação de teste
-        }else {
-            Dialog dialogoPatente = new Dialog(getContext());
-            dialogoPatente.setTitle("Sei não, qual por?");
-            dialogoPatente.setContentView(R.layout.opcoes_patentes);
+        String[] adms = new String[]{"ADM Responsável", "Richard", "Stephen", "Conrado"};
 
-            final LinearLayout llAplicar = (LinearLayout) dialogoPatente.findViewById(R.id.llAplicar);
-            Button aplicar = (Button) dialogoPatente.findViewById(R.id.btPatenteAplicar);
-            aplicar.setOnClickListener(new View.OnClickListener() {
+        Dialog dialogoPatente = new Dialog(getContext());
+        dialogoPatente.setContentView(R.layout.opcoes_patentes);
+
+        Button aplicar = (Button) dialogoPatente.findViewById(R.id.btPatenteAplicar);
+        Button criar = (Button) dialogoPatente.findViewById(R.id.btPatenteCriar);
+        Button finalizar = (Button) dialogoPatente.findViewById(R.id.btPatenteFinalizar);
+        Button editar = (Button) dialogoPatente.findViewById(R.id.btPatenteEditar);
+        Button salvar = (Button) dialogoPatente.findViewById(R.id.btPatenteSalvar);
+
+        final EditText data = (EditText) dialogoPatente.findViewById(R.id.etxDataTeste);
+        data.addTextChangedListener(Mascara.mask(data, Mascara.FORMAT_DATE));
+
+        final LinearLayout llAplicar = (LinearLayout) dialogoPatente.findViewById(R.id.llAplicar);
+        final LinearLayout llCriar = (LinearLayout) dialogoPatente.findViewById(R.id.llCriar);
+
+        Spinner spAdm = (Spinner) dialogoPatente.findViewById(R.id.spAdm);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, adms);
+        spAdm.setAdapter(adapter);
+
+
+        salvar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(contexto, Mascara.validaData(data.getText().toString()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        if(teste == null){
+            aplicar.setEnabled(false);
+            finalizar.setEnabled(false);
+            editar.setEnabled(false);
+            llCriar.setVisibility(View.VISIBLE);
+        }else {
+            aplicar.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (llAplicar.getVisibility() == View.VISIBLE) {
@@ -97,8 +128,19 @@ public class FragmentUsuario extends Fragment implements View.OnClickListener{
                 }
             });
 
-
-            dialogoPatente.show();
+            criar.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(llCriar.getVisibility() == View.VISIBLE){
+                        llCriar.setVisibility(View.GONE);
+                    } else{
+                        llCriar.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
         }
+
+        dialogoPatente.setTitle(getString(R.string.testePatente));
+        dialogoPatente.show();
     }
 }

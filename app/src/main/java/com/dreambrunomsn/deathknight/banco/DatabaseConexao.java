@@ -34,8 +34,8 @@ public class DatabaseConexao extends SQLiteOpenHelper {
             " ABERTO TINYINT(1) DEFAULT 1, " +
             " DATA_TESTE INTEGER(8) NOT NULL, " +
             " ADM_CRIACAO INTEGER NOT NULL, " +
-            " ADM_CONDUTOR INTEGER DEFAULT 0, " +
-            " ADM_RESPONSAVEL INTEGER DEFAULT 0, " +
+            " ADM_CONDUTOR INTEGER DEFAULT 1, " +
+            " ADM_RESPONSAVEL INTEGER DEFAULT 1, " +
             " FOREIGN KEY (ADM_CRIACAO) REFERENCES USUARIO, " +
             " FOREIGN KEY (ADM_CONDUTOR) REFERENCES USUARIO, " +
             " FOREIGN KEY (ADM_RESPONSAVEL) REFERENCES USUARIO " +

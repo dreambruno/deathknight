@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.dreambrunomsn.deathknight.classes.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +41,29 @@ public class DatabaseAcao {
         return null;
     }
 
-    public boolean InserirTestePatente(ContentValues valor){
+    public boolean criarTestePatente(ContentValues valor){
         try {
             db.insert("TESTE_PATENTE", null, valor);
             return true;
         }catch(SQLException e){
             return false;
         }
+    }
+
+    public List<Usuario> getAdm(){
+        String[] colunas = {"ID_USUARIO", "APELIDO"};
+        Cursor cursor = db.query("USUARIO", colunas, "ADM = 1", null,
+                        null, null, "APELIDO");
+        if(cursor.moveToNext()){
+            List<Usuario> lista = new ArrayList<Usuario>();
+            do{
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario("" + cursor.getInt(0));
+                usuario.setApelido(cursor.getString(1));
+                lista.add(usuario);
+            }while(cursor.moveToNext());
+            return lista;
+        }
+        return null;
     }
 }

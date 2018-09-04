@@ -49,6 +49,8 @@
     <string name="btAplicar">Aplicar</string>
     <string name="btFinalizar">Finalizar</string>
 
+    <string name="selectAlgo">Selecione um ADM</string>
+
     <!-- Strings Genéricas -->
     <string name="btSalvar">Salvar</string>
     <string name="btEditar">Editar</string>

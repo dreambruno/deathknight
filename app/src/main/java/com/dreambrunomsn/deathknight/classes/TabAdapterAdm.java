@@ -36,11 +36,9 @@ public class TabAdapterAdm extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 FragmentUsuario usuario = new FragmentUsuario();
-                usuario.setContext(contexto);
                 return usuario;
             case 1:
                 FragmentUniforme uniforme = new FragmentUniforme();
-                uniforme.setContext(contexto);
                 return uniforme;
         }
         return null;

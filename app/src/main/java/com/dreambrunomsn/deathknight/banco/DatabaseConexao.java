@@ -18,13 +18,19 @@ public class DatabaseConexao extends SQLiteOpenHelper {
             " APELIDO TEXT DEFAULT '', " +
             " EMAIL TEXT NOT NULL, " +
             " TELEFONE TEXT NOT NULL, " +
-            " PATENTE TEXT DEFAULT 'Recruta', " +
+            " ID_PATENTE INTEGER DEFAULT 10, " +
             " NASCIMENTO INTEGER(8) NOT NULL, " +
             " BAN_FIM INTEGER(8) DEFAULT 0, " +
             " MASCULINO TINYINT(1) DEFAULT 1, " +
             " ADM TINYINT(1) DEFAULT 0, " +
             " BAN_SCORE INTEGER DEFAULT 0, " +
-            " NIVEL TINYINT(2) DEFAULT 0 " +
+            " NIVEL TINYINT(2) DEFAULT 0, " +
+            " FOREIGN KEY (ID_PATENTE) REFERENCES PATENTE " +
+            " )";
+
+    private final String PATENTE = "CREATE TABLE IF NOT EXISTS PATENTE ( " +
+            " ID_PATENTE INTEGER PRIMARY KEY, " +
+            " DESC_PATENTE VARCHAR(20) NOT NULL " +
             " )";
 
     private final String TESTE_PATENTES =
@@ -64,8 +70,29 @@ public class DatabaseConexao extends SQLiteOpenHelper {
         // métodos de criação de tabelas
         try {
             db.execSQL(USUARIO);
-            db.execSQL("insert into USUARIO (NOME, APELIDO, TELEFONE, NASCIMENTO, ADM, NIVEL, EMAIL ) values('Gabriel', 'Arkhanjo', 987654321, 20001122, 1, 3, 'ark@gmail.com')");
+            db.execSQL("insert into USUARIO (NOME, APELIDO, TELEFONE, NASCIMENTO, ADM, NIVEL, EMAIL, ID_PATENTE ) " +
+                            " values('Gabriel', 'Arkhanjo', 987654321, 20001122, 1, 3, 'ark@gmail.com', 40)");
             Log.i("Código", "Criando usuario - " + USUARIO);
+
+            db.execSQL(PATENTE);
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(1, 'Reserva')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(10, 'Recruta')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(20, 'Soldado')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(30, 'Cabo')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(40, '3º Sargento')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(50, '2º Sargento')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(60, '1º Sargento')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(70, 'Subtenente')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(80, 'Tenente')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(90, 'Capitão')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(100, 'Major')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(110, 'Tenente-Coronel')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(120, 'Coronel')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(130, 'General de Brigada')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(140, 'General de Divisão')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(150, 'General de Exército')");
+            db.execSQL("INSERT INTO PATENTE (ID_PATENTE, DESC_PATENTE) VALUES(160, 'Marechal')");
+            Log.i("Código", "Criando patente - " + PATENTE);
 
             db.execSQL(TESTE_PATENTES);
             db.execSQL("insert into TESTE_PATENTE (ID_TESTE, DATA_CRIACAO, DATA_TESTE, ADM_CRIACAO ) values(1, 20180901, 20180920, 1)");

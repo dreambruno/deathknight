@@ -58,7 +58,7 @@ public class DatabaseAcao {
             List<Usuario> lista = new ArrayList<Usuario>();
             do{
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario("" + cursor.getInt(0));
+                usuario.setIdUsuario(cursor.getInt(0));
                 usuario.setApelido(cursor.getString(1));
                 lista.add(usuario);
             }while(cursor.moveToNext());

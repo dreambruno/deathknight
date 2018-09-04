@@ -1,10 +1,9 @@
 package com.dreambrunomsn.deathknight.classes;
 
 import android.app.Dialog;
-import android.support.v4.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +29,6 @@ import java.util.List;
 
 public class FragmentUsuario extends Fragment implements OnClickListener{
 
-    private Context contexto;
     private Button btBanir;
     private Button btPatente;
 
@@ -55,14 +53,10 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
         return view;
     }
 
-    public void setContext(Context context) {
-        this.contexto = context;
-    }
-
     @Override
     public void onClick(View v) {
         if(v.getId() == btBanir.getId()){
-            Toast.makeText(contexto, "Foi banido!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Foi banido!", Toast.LENGTH_SHORT).show();
         } else if(v.getId() == listarBan.getId()){
             listarBanidos(true);
         } else if(v.getId() == listarHoje.getId()){
@@ -82,10 +76,22 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
     public void testePatente(){
         DatabaseAcao dba = new DatabaseAcao(getContext());
         List<TestePatenteVo> teste = dba.getTestePatente();
-        String[] adms = new String[]{"ADM Responsável", "Richard", "Stephen", "Conrado"};
+        List<Usuario> adm = dba.getAdm();
+
+        int[] admCod = new int[adm.size() + 1];
+        String[] admNome = new String[adm.size() + 1];
+        int i = 0;
+
+        admNome[i] = "Selecione um ADM";
+        admCod[i] = 0;
+        for(Usuario us : adm){
+            i++;
+            admNome[i] = us.getApelido();
+            admCod[i] = us.getIdUsuario();
+        }
 
         Dialog dialogoPatente = new Dialog(getContext());
-        dialogoPatente.setContentView(R.layout.opcoes_patentes);
+        dialogoPatente.setContentView(R.layout.dialog_patentes);
 
         Button aplicar = (Button) dialogoPatente.findViewById(R.id.btPatenteAplicar);
         Button criar = (Button) dialogoPatente.findViewById(R.id.btPatenteCriar);
@@ -99,15 +105,22 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
         final LinearLayout llAplicar = (LinearLayout) dialogoPatente.findViewById(R.id.llAplicar);
         final LinearLayout llCriar = (LinearLayout) dialogoPatente.findViewById(R.id.llCriar);
 
-        Spinner spAdm = (Spinner) dialogoPatente.findViewById(R.id.spAdm);
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, adms);
+        final Spinner spAdm = (Spinner) dialogoPatente.findViewById(R.id.spAdm);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, admNome);
         spAdm.setAdapter(adapter);
 
 
         salvar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(contexto, Mascara.validaData(data.getText().toString()), Toast.LENGTH_SHORT).show();
+                boolean ok = true;
+                if(spAdm.getSelectedItemPosition() == 0){
+                    ok = false;
+                    Toast.makeText(getContext(), getString(R.string.selectAlgo), Toast.LENGTH_SHORT).show();
+                }
+                if(true){
+                    data.setError("Data Incorreta!");
+                }
             }
         });
 

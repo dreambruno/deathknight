@@ -49,7 +49,7 @@
     <string name="btAplicar">Aplicar</string>
     <string name="btFinalizar">Finalizar</string>
 
-    <string name="selectAlgo">Selecione um ADM</string>
+    <string name="admResponsavel">ADM responsável</string>
 
     <!-- Strings Genéricas -->
     <string name="btSalvar">Salvar</string>

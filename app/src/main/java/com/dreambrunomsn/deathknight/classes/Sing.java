@@ -20,4 +20,8 @@ public class Sing {
     public static Usuario getUsuario() {
         return usuario;
     }
+
+    public static void setUsuario(Usuario user){
+        Sing.usuario = user;
+    }
 }

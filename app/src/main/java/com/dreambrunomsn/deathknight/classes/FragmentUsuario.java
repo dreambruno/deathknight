@@ -1,6 +1,9 @@
 package com.dreambrunomsn.deathknight.classes;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -19,8 +23,10 @@ import android.widget.Toast;
 import com.dreambrunomsn.deathknight.R;
 import com.dreambrunomsn.deathknight.banco.DatabaseAcao;
 import com.dreambrunomsn.deathknight.banco.TestePatenteVo;
+import com.dreambrunomsn.deathknight.utilitario.Data;
 import com.dreambrunomsn.deathknight.utilitario.Mascara;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -34,6 +40,8 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
 
     private TextView listarBan;
     private TextView listarHoje;
+
+    private Calendar diaTeste;
 
     @Nullable
     @Override
@@ -49,6 +57,8 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
         btPatente.setOnClickListener(this);
         listarBan.setOnClickListener(this);
         listarHoje.setOnClickListener(this);
+
+        diaTeste = Calendar.getInstance();
 
         return view;
     }
@@ -74,15 +84,15 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
     }
 
     public void testePatente(){
-        DatabaseAcao dba = new DatabaseAcao(getContext());
-        List<TestePatenteVo> teste = dba.getTestePatente();
-        List<Usuario> adm = dba.getAdm();
+        final DatabaseAcao dba = new DatabaseAcao(getContext());
+        final List<TestePatenteVo> teste = dba.getTestePatente();
+        final List<Usuario> adm = dba.getAdm();
 
-        int[] admCod = new int[adm.size() + 1];
+        final int[] admCod = new int[adm.size() + 1];
         String[] admNome = new String[adm.size() + 1];
         int i = 0;
 
-        admNome[i] = "Selecione um ADM";
+        admNome[i] = getString(R.string.admResponsavel);
         admCod[i] = 0;
         for(Usuario us : adm){
             i++;
@@ -90,7 +100,7 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
             admCod[i] = us.getIdUsuario();
         }
 
-        Dialog dialogoPatente = new Dialog(getContext());
+        final Dialog dialogoPatente = new Dialog(getContext());
         dialogoPatente.setContentView(R.layout.dialog_patentes);
 
         Button aplicar = (Button) dialogoPatente.findViewById(R.id.btPatenteAplicar);
@@ -98,9 +108,7 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
         Button finalizar = (Button) dialogoPatente.findViewById(R.id.btPatenteFinalizar);
         Button editar = (Button) dialogoPatente.findViewById(R.id.btPatenteEditar);
         Button salvar = (Button) dialogoPatente.findViewById(R.id.btPatenteSalvar);
-
-        final EditText data = (EditText) dialogoPatente.findViewById(R.id.etxDataTeste);
-        data.addTextChangedListener(Mascara.mask(data, Mascara.FORMAT_DATE));
+        final Button dataTeste = (Button) dialogoPatente.findViewById(R.id.btDataTeste);
 
         final LinearLayout llAplicar = (LinearLayout) dialogoPatente.findViewById(R.id.llAplicar);
         final LinearLayout llCriar = (LinearLayout) dialogoPatente.findViewById(R.id.llCriar);
@@ -110,16 +118,48 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
         spAdm.setAdapter(adapter);
 
 
+        dataTeste.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        diaTeste.set(year, month, dayOfMonth);
+                        dataTeste.setText(Data.dataFormatada(diaTeste));
+                    }
+                };
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), dateListener,
+                        diaTeste.get(Calendar.YEAR),
+                        diaTeste.get(Calendar.MONTH),
+                        diaTeste.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
         salvar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean ok = true;
                 if(spAdm.getSelectedItemPosition() == 0){
                     ok = false;
-                    Toast.makeText(getContext(), getString(R.string.selectAlgo), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.admResponsavel), Toast.LENGTH_SHORT).show();
                 }
                 if(true){
-                    data.setError("Data Incorreta!");
+                    //ok = false;
+                    System.out.println("dia " + Data.calendarToInt(diaTeste));
+                }
+                if(ok){
+                    ContentValues cv = new ContentValues();
+                    cv.put("ADM_RESPONSAVEL", admCod[spAdm.getSelectedItemPosition()]);
+                    cv.put("DATA_TESTE", Data.calendarToInt(diaTeste));
+                    try {
+                        dba.criarTestePatente(cv);
+                        dialogoPatente.dismiss();
+                        //TODO: Abrir tela de edição do teste
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), "Erro ao Salvar Teste!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -149,6 +189,24 @@ public class FragmentUsuario extends Fragment implements OnClickListener{
                     } else{
                         llCriar.setVisibility(View.VISIBLE);
                     }
+                }
+            });
+
+            editar.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String t = "";
+                    for(TestePatenteVo tv : dba.getTestePatente()){
+                        t += "--> \n";
+                        t += "DATA_CRIACAO: " + tv.getDataCriacao() + "\n";
+                        t += "ADM_CRIACAO: " + tv.getAdmCriacao() + "\n";
+                        t += "ID_TESTE: " + tv.getIdTeste() + "\n";
+                        t += "DATA_TESTE: " + tv.getDataTeste() + "\n";
+                        t += "ADM_RESPONSAVEL: " + tv.getAdmResponsavel() + "\n";
+                        t += "ADM_CONDUTOR: " + tv.getAdmCondutor() + "\n";
+                        t += "ABERTO: " + tv.isAtivo() + "\n";
+                    }
+                    System.out.println("\n TESTE: \n" + t);
                 }
             });
         }

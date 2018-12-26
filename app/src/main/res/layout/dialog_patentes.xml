@@ -36,17 +36,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="right"
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <EditText
-                    android:id="@+id/etxDataTeste"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
                     android:gravity="right"
-                    android:hint="15/07/1981"
-                    android:inputType="date" />
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btDataTeste"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/backgound_botao"
+                        android:scaleY=".8"
+                        android:text="Data do Teste"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
                 <Spinner
                     android:id="@+id/spAdm"

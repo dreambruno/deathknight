@@ -52,7 +52,11 @@ public class Data {
             return Integer.toString(num);
         }
     }
-
+    /**
+    * Retorna a data no formato dd/mm/aaaa
+     * @param data no formato Calendar
+     * @return string
+     **/
     public static String dataFormatada(Calendar data){
         String retorno = "";
         if(data != null) {
@@ -61,5 +65,13 @@ public class Data {
             retorno += data.get(Calendar.YEAR);
         }
         return retorno;
+    }
+
+    public static int calendarToInt(Calendar diaTeste) {
+        String data =   diaTeste.get(Calendar.YEAR)
+                        + Data.addZero(diaTeste.get(Calendar.MONTH))
+                        + Data.addZero(diaTeste.get(Calendar.DAY_OF_MONTH));
+
+        return Integer.valueOf(data);
     }
 }
